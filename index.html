@@ -15,8 +15,14 @@ location.replace(location.href);
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@600&amp;display=swap" rel="stylesheet"></link>
    <meta charset="UTF-8"></meta>
    <meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
-    <title>UddinSports</title>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-cache">
+<link rel="manifest" href="/uddinsports/uddinsportsManifest.json"> 
+    <title>UddinSports</title>
+
+
+  
 <style>
 body{
     margin:0;
@@ -1879,6 +1885,252 @@ UddinSports Disclaimer  </a>  :- Full free watch online sports in UddinSports co
       </a>
   </div>
   
+  
+<script>
+    // ===== কত সেকেন্ড পরে লেখা হাইড হবে =====
+/*     setTimeout(function() {
+        document.getElementById("centerText").style.display = "none";
+    }, 9000);
+ */  
+
+
+
+  
+/* SERVICE WORKER old */
+/* 
+if('serviceWorker' in navigator){
+navigator.serviceWorker.register('service-worker.js')
+.then(()=>console.log("SW Registered"))
+.catch(e=>console.log(e));
+}
+ */  
+/* SERVICE WORKER new*/
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('service-worker.js')
+    .then(reg => {
+      console.log("SW Registered");
+
+      // detect updates
+      reg.onupdatefound = () => {
+        const newWorker = reg.installing;
+
+        newWorker.onstatechange = () => {
+          if (newWorker.state === "installed" && navigator.serviceWorker.controller) {
+            // new update found, reload silently
+            console.log("New SW update, reloading silently...");
+            location.reload();
+          }
+        };
+      };
+
+    })
+    .catch(e => console.log(e));
+}
+</script>
+
+
+
+<!-- PWA Install / Shortcut Popup -->
+<div id="appPopup" style="display:none;position:fixed;bottom:20px;left:10px;right:10px;background:#fff;padding:20px;text-align:center;border-radius:10px;box-shadow:0 0 10px rgba(0,0,0,0.3);z-index:9999;">
+  <!-- Close button -->
+  <div style="text-align:right">
+    <span onclick="closePopup()" style="cursor:pointer;font-weight:bold;font-size:18px;">&times;</span>
+  </div>
+
+  <!-- Message Text -->
+  <p id="popupMessage">Add Home Page Shotcut UddinSports for Better Experience</p>
+
+  <!-- Install Button -->
+  <button onclick="handleInstallClick()" style="padding:12px 25px;background:#28a745;color:#fff;border:none;border-radius:6px;">
+    Install Now
+  </button>
+</div>
+
+<script>
+
+// ===================== PWA & Popup Logic =====================
+
+let deferredPrompt;
+
+
+// ------------------- Check Installed -------------------
+
+function isPWAInstalled(){
+
+if(window.matchMedia('(display-mode: standalone)').matches) return true;
+
+if(window.navigator.standalone === true) return true;
+
+return false;
+
+}
+
+
+// ------------------- Device Detect -------------------
+
+function isAndroid(){
+
+return /Android/i.test(navigator.userAgent);
+
+}
+
+function isIOS(){
+
+return /iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+}
+
+
+// ------------------- Messenger Detect -------------------
+
+function isMessengerBrowser(){
+
+return /FBAN|FBAV|Messenger/i.test(navigator.userAgent);
+
+}
+
+
+// ------------------- Show Popup -------------------
+
+function showInstallPopup(){
+
+//if(localStorage.getItem("pwaHideForever")) return;
+
+if(isIOS()) return;
+
+if(!isAndroid()) return;
+
+if(isPWAInstalled()) return;
+
+document.getElementById('appPopup').style.display='block';
+
+}
+
+
+// ------------------- Close Popup -------------------
+
+function closePopup(){
+
+document.getElementById('appPopup').style.display='none';
+
+}
+
+
+// ------------------- Open Supported Browser -------------------
+
+function openSupportedBrowser(){
+
+const url = window.location.href.replace(/^https?:\/\//,"");
+
+const browsers=[
+
+"intent://"+url+"#Intent;scheme=https;package=com.android.chrome;end",
+
+"intent://"+url+"#Intent;scheme=https;package=com.microsoft.emmx;end",
+
+"intent://"+url+"#Intent;scheme=https;package=org.mozilla.firefox;end",
+
+"intent://"+url+"#Intent;scheme=https;package=com.sec.android.app.sbrowser;end"
+
+];
+
+let opened=false;
+
+browsers.forEach(function(link){
+
+if(!opened){
+
+opened=true;
+
+window.location.href=link;
+
+}
+
+});
+
+
+setTimeout(function(){
+
+//localStorage.setItem("pwaHideForever","true");
+
+},2000);
+
+}
+
+
+// ------------------- Install Button -------------------
+
+function handleInstallClick(){
+
+const popup=document.getElementById('appPopup');
+
+popup.style.display='none';
+
+if(deferredPrompt){
+
+deferredPrompt.prompt();
+
+deferredPrompt.userChoice.then(function(choice){
+
+if(choice.outcome!=="accepted"){
+
+openSupportedBrowser();
+
+}
+
+deferredPrompt=null;
+
+});
+
+return;
+
+}
+
+
+openSupportedBrowser();
+
+}
+
+
+// ------------------- Install Success Detect -------------------
+
+window.addEventListener('appinstalled',function(){
+
+localStorage.setItem("pwaHideForever","true");
+
+});
+
+
+// ------------------- Capture Install Event -------------------
+
+window.addEventListener('beforeinstallprompt',function(e){
+
+e.preventDefault();
+
+deferredPrompt=e;
+
+});
+
+
+// ------------------- Page Load -------------------
+
+window.addEventListener('load',function(){
+
+showInstallPopup();
+
+});
+
+
+// ------------------- Change Popup Text -------------------
+
+function setPopupMessage(text){
+
+document.getElementById("popupMessage").innerText=text;
+
+}
+
+</script>
+
   
 </body>
 </html>
