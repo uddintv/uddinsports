@@ -501,11 +501,11 @@ animation: blink 1s infinite;
     width: 70%; /* স্ক্রিনের ৯০% জায়গা নেবে */
     max-width: 330px; /* 740px330px; সর্বোচ্চ সাইজ বড় অ্যাডের সমান */
     background: rgba(0, 0, 0, 0.0);/* rgba(0, 0, 0, 0.5); */
-    padding: 1px;
-    border-radius: 0px; /* 8px; */
+    padding: 0px;  /* 1px; */
+    border-radius: 8px; /* 8px; 0px; */
     text-align: center;
     z-index: 2000; /* যেন ভিডিওর উপরে থাকে */ 
-  
+   border: 1px solid #fff;/* */  
 }
 
 /* অ্যাড কন্টেইনার যা সব সাইজ অ্যাডকে ফিট করবে */
@@ -524,23 +524,34 @@ animation: blink 1s infinite;
 }
 
 
+/*  */
+#taxt-ad {
+    position: absolute;
+    top: 0px;
+    left : 2px;
+    color:#1d6fa5 ;/* red; white; */
+    z-index: 2210; /* যেন ভিডিওর উপরে থাকে */
+    margin: 0px 0px 0px 5px  ; 
+  
+}
+  
 
 /* বন্ধ করার (X) বাটন */
 #close-ad {
     position: absolute;
     /* top: 52px; */
     bottom: 0px;/*-10px;*/
-    right: 10px;/* -10px; 30%*/
+    right: 3px;/* 10px; -10px; 30%*/
     background: red ;/* transparent */
     color: white;/* red */
-    border: 1px solid #777;/* white; none; */
+    border: 1px solid #fff ;  /* white; none; #777; */
     border-radius: 50%;
     width: ;/* 25px */
     height: ;/* 25px */
     cursor: pointer;
     font-weight: bold;
-    font-size: 11px;
-    padding: 1px 3px;
+    font-size: 12px;
+    padding: 1px 4px;
     line-height: ;/* 25px */
     text-align: center;
     box-shadow: 0 0 5px rgba(0,0,0,0.5);
@@ -599,7 +610,9 @@ animation: blink 1s infinite;
   
   
 <div id="delayed-ad">
-    <button id="close-ad" onclick="hideAd()">X</button>
+  <span style="color: ; " id="taxt-ad"> Ad </span>
+
+  <button id="close-ad" onclick="hideAd()">X</button>
     <div class="ad-container" style="height: 50px;">
         <script type="text/javascript">
             atOptions = {
