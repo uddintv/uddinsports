@@ -168,10 +168,12 @@ video, iframe{
 }
 .full-btn:hover  {
     transform:scale(1.3); /* transform: translateY(-2px); *//* হালকা লিফট ইফেক্ট */
+  color: #fff; /* */
 }
   /* ২. মাউস যখন ভিডিওর ওপর (playerBox) থাকবে */
 #videoBox.mouse-active .full-btn {
-   color:rgba(225,225,0,1);  border:0px solid rgba(225,225,1);
+  color: #fff;   /* rgba(225,225,0,1);  */
+  border:0px solid rgba(225,225,1);
 }
 .refresh-btn{
     position: absolute;
@@ -293,15 +295,17 @@ video, iframe{
     border:1px solid lime; /* #012447;  2px solid lime; */
     border-bottom: 1px solid lime; /* #012447;  2px solid lime; */
 } 
-  
+   /*   */
 .video-btn span{
     color: #fff;
     font-size:; /*14px; */
     font-weight:bold;
     white-space:nowrap;
 }
-  
+.video-btn.active span{
+    color: yellow ;  /*   */
 
+} 
 
   
 .video-btn div{
@@ -702,7 +706,7 @@ animation: blink 1s infinite;
 
 
 <div class="categories" style="margin-bottom: 0px;">
-      <div class="arrow"  onclick="prevVideo()">❮Prev</div>
+      <div class="arrow"  onclick="prevVideo()">❮❮Prev</div>
 
     <button  style="display: none;" onclick="filterCategory('football',this)">FOOTBALL</button>
     <button  style="display: none;" onclick="filterCategory('cricket',this)">CRICKET</button>
@@ -710,7 +714,7 @@ animation: blink 1s infinite;
     <button  style="display: none;" onclick="filterCategory('hindi',this)">HINDI</button>
     <button  style="display: none;" onclick="filterCategory('english',this)">ENGLISH</button>
     <button  style=" opacity: 0;" class="active" onclick="filterCategory('all',this)">ALL</button>
-    <div class="arrow" onclick="nextVideo()">Next❯</div>
+    <div class="arrow" onclick="nextVideo()">Next❯❯</div>
 
 </div>
 
