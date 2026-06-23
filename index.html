@@ -52,7 +52,7 @@ body{
     border: 1px solid #222; 
     box-shadow: 0 10px 40px rgba(0,0,0,0.9); 
     text-align:center;
-    overflow-x:hidden;
+    /* overflow-x:hidden;*/
     align-items: center;
     margin: 0 auto; /* ব্লগস্পটে সেন্টারের জন্য জরুরি */
         }
@@ -61,7 +61,7 @@ body{
 .logo{  
   font-family: sans-serif;/* */
     font-size:26px;  /* 0px */
-    color: yellow ;  /* #000 */
+    color: lime ;  /* yellow; #000 */
     font-weight:bold;
     padding: 15px;  /*padding-bottom: 10px; */ /* 3px */
     letter-spacing:2px;
@@ -99,7 +99,7 @@ body{
 video, iframe{
     width:768px; /* 100%; */
     height:320px; /* 100%; */
-    border:3px solid yellow;
+    border:3px solid #111; /* 3px solid yellow; */
     display:block;
     position:relative; 
     z-index:1;
@@ -164,7 +164,7 @@ video, iframe{
     justify-content:center;
     cursor:pointer;
     transition: 0.3s;
-    color:rgba(225,225,0,0.9);
+    color: #fff ; /* rgba(225,225,0,0.9); */
 }
 .full-btn:hover  {
     transform:scale(1.3); /* transform: translateY(-2px); *//* হালকা লিফট ইফেক্ট */
@@ -199,9 +199,9 @@ video, iframe{
     background:rgb(255, 215, 0, 0.2);  /*#555*/
     color:yellow;
     border:1px solid rgb(255, 215, 0, 0.1);
-    padding:6px 10px;
-    margin:3px;
-    margin-top:6px;
+    padding:0px;  /*6px 10px;*/
+    margin: 5px 0px;  /*3px*/
+    margin-top: 0px;  /*6px*/
     cursor:pointer;
 }
 .categories button:hover {
@@ -218,7 +218,7 @@ video, iframe{
 .video-wrapper{
     width:768px;
     margin:auto;
-    display:flex;
+    /* display:flex; */
     align-items:center;
     justify-content:center;
     margin-top:20px;
@@ -242,58 +242,75 @@ video, iframe{
     margin:auto;
     */
    /*(SHOW CH BUTTON ALL) */
-    display:flex;
+  
+  
+    /*display:flex;
     flex-wrap:wrap;
-    justify-content:center;
-    overflow:visible;  
+    justify-content:center; */
+    overflow:visible; 
 }
   
 .video-container::-webkit-scrollbar{
     display:none;           /*..... Chrome scrollbar hide */
 }
 .video-btn{
-    text-align:center;
-    margin:9px ;
-    cursor:pointer;
     /* min-width:70px;  */
-    border-radius: 50px; /*  10px; */    padding:0px 10px;
-    border:2px solid #333;
-    background: #222;
+    display:flex; /*   */
+    align-items:center;
+    gap:15px; /* 9px;  */
+    margin:2px; /*   */
+    padding: 5px 10px; /* 0px 10px; 6px 20px; */
+    cursor:pointer;
+    border-radius: 4px; /*  50px; 10px; */
+    border: 1px solid #012447; /* 2px solid #333; #1e1e1e; #111; */
+    background: #012447; /* #222;  1e1e1e;*/
+    text-align:left; /* center  */
   }
 .video-btn:hover {
-  transform: translateY(-1px); 
-  background: #1e1e1e;
+   /* transform: translateY(-1px);*/
+  background: #061729; /* #1e1e1e; #333;  #012447; */
+  border-left: 4px solid yellow ; /* */
 }
 .video-btn.active {
-    border:2px solid lime;
-    border-bottom: 1px solid lime; /* 3px solid yellow; */ 
+    border:1px solid orange ;  /* 2px solid lime; */
+   /*  border-bottom: 1px solid lime;  */ 
     transform: translateY(-0px);
-    background: #000;
+    background: #012447 ;  /* #000;  */
   
 }
 .video-btn img{
-    margin:auto;
-    width:65px;
-    height:65px;
-    border-radius:50%;
+    width:40px;
+    height:40px;
+    flex-shrink:0;  /*  */
+    margin: 0; /* auto  */
+    /* border-radius:50%;  */
     display:block;
-    border:2px solid #333;
+    background: #061729 ;  /*  */
+    border: 2px solid orange ; /* 2px solid #333; */
 }
-/*  
+/*    */
 .video-btn.active img{
-    border:2px solid lime;
-    border-bottom: 2px solid lime;
+    border:2px solid #012447; /* 2px solid lime; */
+    border-bottom: 2px solid #012447; /* 2px solid lime; */
 } 
   
-  */
+.video-btn span{
+    color: #fff;
+    font-size:; /*14px; */
+    font-weight:bold;
+    white-space:nowrap;
+}
+  
 
+
+  
 .video-btn div{
     font-size:11px;
     margin-top: -14px;
   color: yellow;
 }
 .video-btn.active div{
-     margin-top: - ;
+     margin-top: ;
 }
 
 
@@ -312,8 +329,8 @@ video, iframe{
     width:100%;
     height: 100%;  /*height:220px;*/
     border: 0px solid ;
-    border-top: 1px solid yellow;
-    border-bottom: 1px solid yellow;
+    border-top: 1px solid #111; /*yellow;*/
+    border-bottom: 1px solid #111; /*yellow;*/
   
   }
 /* CONTROL BUTTONS===
@@ -580,11 +597,11 @@ animation: blink 1s infinite;
     font-size: 16px;
     cursor: pointer;
     z-index: 5;  
-    background: #222 ;/* #d18f00 */
+    background: #22222200 ;  /*#222 #d18f00 */
     font-weight: bold;
-    color: lime;/* #ff7403 */
+    color: #222222;   /* lime; #ff7403 */
     padding: 1px 10px;
-    margin: 5px 0px;
+    margin: 0px 0px;  /* 5px 0px;  */
 }
 
 .categories .arrow:first-child{
@@ -684,7 +701,7 @@ animation: blink 1s infinite;
 
 
 <div class="categories" style="margin-bottom: 0px;">
-      <div class="arrow"  onclick="prevVideo()">❮ Prev Ch</div>
+      <div class="arrow"  onclick="prevVideo()">❮Prev</div>
 
     <button  style="display: none;" onclick="filterCategory('football',this)">FOOTBALL</button>
     <button  style="display: none;" onclick="filterCategory('cricket',this)">CRICKET</button>
@@ -692,7 +709,7 @@ animation: blink 1s infinite;
     <button  style="display: none;" onclick="filterCategory('hindi',this)">HINDI</button>
     <button  style="display: none;" onclick="filterCategory('english',this)">ENGLISH</button>
     <button  style=" opacity: 0;" class="active" onclick="filterCategory('all',this)">ALL</button>
-    <div class="arrow" onclick="nextVideo()">Next Ch ❯</div>
+    <div class="arrow" onclick="nextVideo()">Next❯</div>
 
 </div>
 
@@ -1493,9 +1510,9 @@ let fragment = document.createDocumentFragment(); //new add for not siour
         div.className="video-btn";
 
         div.innerHTML=`
-        <img loading="lazy" src="${v.img || 'https://placehold.co/60x60/ddd/999?text=no%0Aimage'}" 
-             onerror="this.src='https://placehold.co/60x60/ddd/999?text=no%0Aimage'">
-      <br> <div>${v.name}</div> <!-- -->
+        <img loading="lazy" src="${v.img || 'https://placehold.co/40x40/ddd/999?text=no%0Aimage'}" 
+             onerror="this.src='https://placehold.co/40x40/ddd/999?text=no%0Aimage'">
+       <span>${v.name}</span> <!-- -->
              `;
 
         div.onclick=function(){
