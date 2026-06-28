@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+
+<!-- =================================
+CHARSET + MOBILE VIEW
+================================= -->
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- =================================
+PAGE TITLE
+================================= -->
+<title>ADD URL FOR AD FREE</title>
+
+<style>
+
+/* =================================
+পুরো পেজ black background
+================================= */
+
+html, body{
+margin:0;
+padding:0;
+width:100%;
+height:100%;
+background:#000;
+overflow:hidden;
+}
+
+
+/* =================================
+PLAYER WRAPPER
+================================= */
+
+#video-wrapper{
+width:100vw;
+height:100vh;
+position:relative;
+background:#000;
+}
+
+
+/* =================================
+IFRAME FULLSCREEN
+================================= */
+
+iframe{
+width:100%;
+height:100%;
+border:none;
+}
+
+
+</style>
+
+</head>
+
+<body>
+
+
+<div id="video-wrapper">
+
+
+<!-- =================================
+IFRAME PLAYER
+sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
+এখানে PHP / EMBED PAGE লোড হবে
+================================= -->
+
+<iframe
+id="phpFrame"
+sandbox="allow-scripts allow-same-origin"
+allow="autoplay; fullscreen"
+allowfullscreen
+></iframe>
+
+
+
+</div>
+
+
+<script>
+
+/*
+
+========================================
+
+URL PARAMETER SYSTEM
+
+Example link:
+
+playerphp.html?url=https://streamcrichd.com/update/willowcricket.php
+
+FULL Example:
+
+https://asmaakther.github.io/playerphp/playerphp.html?url=https://streamcrichd.com/update/willowcricket.php
+
+========================================
+
+*/
+
+
+/* URL PARAMETER READ */
+
+const params=new URLSearchParams(window.location.search);
+
+
+/* URL GET */
+
+const url=params.get("url");
+
+
+/* iframe select */
+
+const frame=document.getElementById("phpFrame");
+
+
+/* যদি URL থাকে iframe load করবে */
+
+if(url){
+
+frame.src=url;
+
+}
+
+
+/* যদি URL না থাকে error message */
+
+else{
+
+document.getElementById("centerText").innerHTML="NO STREAM LINK FOUND";
+
+}
+
+
+
+
+</script>
+
+</body>
+</html>
