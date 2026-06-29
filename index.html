@@ -257,7 +257,7 @@ video, iframe{
 .video-container::-webkit-scrollbar{
     display:none;           /*..... Chrome scrollbar hide */
 }
-.video-btn{  
+.video-btn{   position: relative;   /* এটি যোগ করুন */
     /* min-width:70px;  */
     display:flex; /*   */
     align-items:center;
@@ -275,12 +275,6 @@ video, iframe{
   background: #061729; /* #1e1e1e; #333;  #012447; */
   border-left: 4px solid yellow ; /* */
 }
-.video-btn.active {
-    border:1px solid orange ;  /* 2px solid lime; */
-   /*  border-bottom: 1px solid lime;  */ 
-    transform: translateY(-0px);
-    background: #012447 ;  /* #000;  */
-}
 
   
   
@@ -292,11 +286,14 @@ left: 50%;
 transform: translate(-50%, -50%);
 font-size: 30px;  /* P50px;  */
 color: #fff;  /* #38bdf8;  */
+background: #000 ;
 opacity: 0;
 transition: opacity .25s ease;
 pointer-events: none;
 z-index: 3;
 text-shadow: 0 0 10px rgba(56, 189, 248, .7);  /* 0 0 10px rgba(56, 189, 248, .7); */
+padding: 2px 0px 2px 5px;
+border-radius: 25px;
 }
 /* hover-এ দ&#2503;খ&#2494;ন&#2507; */
 .video-btn:hover::before {
@@ -306,7 +303,13 @@ opacity: 1;
   
   
   
-  
+.video-btn.active {
+    border:1px solid orange ;  /* 2px solid lime; */
+   /*  border-bottom: 1px solid lime;  */ 
+    transform: translateY(-0px);
+    background: #012447 ;  /* #000;  */
+}
+
   
   
   
