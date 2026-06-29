@@ -281,8 +281,36 @@ video, iframe{
     transform: translateY(-0px);
     background: #012447 ;  /* #000;  */
 }
+
   
-.video-btn img{
+  
+.video-btn::before {
+content:  "\25B7" ;  /* "\25B6" Play icon "&#9654;";  */
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 30px;  /* P50px;  */
+color: #fff;  /* #38bdf8;  */
+opacity: 0;
+transition: opacity .25s ease;
+pointer-events: none;
+z-index: 3;
+text-shadow: 0 0 10px rgba(56, 189, 248, .7);  /* 0 0 10px rgba(56, 189, 248, .7); */
+}
+/* hover-এ দ&#2503;খ&#2494;ন&#2507; */
+.video-btn:hover::before {
+opacity: 1;
+}
+  
+  
+  
+  
+  
+  
+  
+  
+  .video-btn img{
     width:40px;
     height:40px;
     flex-shrink:0;  /*  */
