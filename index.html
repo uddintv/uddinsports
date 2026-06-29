@@ -257,7 +257,7 @@ video, iframe{
 .video-container::-webkit-scrollbar{
     display:none;           /*..... Chrome scrollbar hide */
 }
-.video-btn{
+.video-btn{  position: relative; /*   */
     /* min-width:70px;  */
     display:flex; /*   */
     align-items:center;
@@ -280,8 +280,22 @@ video, iframe{
    /*  border-bottom: 1px solid lime;  */ 
     transform: translateY(-0px);
     background: #012447 ;  /* #000;  */
-  
 }
+  
+ /*   */
+.video-btn.active::before{
+    content: "";
+    position: absolute;
+    left: 15px;
+    top: 15px;
+    width: 45px;
+    height: 45px;
+    background: url("https://h5-static.aoneroom.com/spa/videoPlayPage/assets/video-re-play.a2352f21.webp") no-repeat center;
+    background-size: contain;
+    pointer-events: none;
+}
+
+  
 .video-btn img{
     width:45px;
     height:45px;
@@ -777,7 +791,7 @@ var videoLinkData = {};
 var videos = [
 
 
- {name:"WORLD CUP 2026 ⚽", 
+ {name:"WORLD CUP 2026 ", 
 img:"https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_emblem.svg/250px-2026_FIFA_World_Cup_emblem.svg.png?_=20230519003440",
    link:["https://aman007power.blogspot.com/p/embed-world-cup-football.html" ], 
    categories:["football"], 
@@ -806,7 +820,7 @@ img:"https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_em
 
 /* img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhPfDlT8moyFr49N4jzHf5tiB6ou5R1tEXYPmvBrHgcwMFMDXcmKmePCIfU48z9WXZq6lCxxvdrJoP1RbXH_iMCrB3d3OMmehUseis8YAGpVoj0R8fhST0ewYCg2Cq_8XfO8HHJyWNCJ45BjbydK_rHbHMnW5IkhdvV75DNeJ80lW0YIT3WsAN4Rzz-k08/s320/F8.png", */
 /* img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgMTlJLYxTSTSWTJrmte39336CtgRmkFxQVvUVGDobHM6_b6VJZHaO9rxTSr9LPlTNfz2EqhMQ_mjKTLraIVgp63D82fynpWnf-LrF7KAma3YhrFMDSV3j56F7bEdKG9vWk9nnenSnZFCNqiWFJvTpSP0ULQw1JjYLJrOZPa-2c6fAqg4NCYfnkgpcfrMY/s1600/LIVE%20MATCH.png",  */
-  {name:" FOOTBALL LIVE ONLY ⚽", 
+  {name:"LIVE All FOOTBALL", 
 img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Soccerball_shade.svg/40px-Soccerball_shade.svg.png",
    link:["https://aman007power.blogspot.com/p/embed-live-match-only.html", "https://aman007power.blogspot.com/p/embed-live-football-3.html", "https://uddinsp.blogspot.com/p/embed-live-football-2.html", "https://uddinsp.blogspot.com/p/embed-live-football.html","https://aman007power.blogspot.com/p/live-football.html"], 
    categories:["football"], 
@@ -816,32 +830,32 @@ img:"https://upload.wikimedia.org/wikipedia/commons/thumb/5/51/Soccerball_shade.
 
   
 /*   img:"https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_emblem.svg/250px-2026_FIFA_World_Cup_emblem.svg.png?_=20230519003440",   */ 
-  {name:"BeiN SPORTS 1 ⚽", 
+  {name:"BeiN SPORTS 1 ", 
 img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlqIEw824sBdcgq47u-s4i6mOgvNZ_t4IQoMc8FDS729trAveoRXK4AArodw7AZHG_L2VS7vymdc2RpsMz_tTn-BiFAIXzqyvdTBSt0a4riLkNKajZVP2Pi7doW2kf7SpuFIQCNlpB1iHfXmn0-yQb3zAJbSE0ckNLrEdFxb4MdVxliDP-WFMOBnRPrfE/s1600/BEIN%20SP.png",   link:["https://aman007power.blogspot.com/p/embed-bean-arabic1.html",  "https://aaa.yallashoot2026.com/albaplayer/sports-1/?serv=2", "https://o1.go-yammmash.online/albaplayer/b1/?serv=3", "https://frfff.shootwithyalla.com/albaplayer/sports-1/?serv=2" ], 
    categories:["football"], 
    countdown:7 
   },  
 
-   {name:"SPORT.TV 5 ⚽ ", 
+   {name:"SPORT.TV 5  ", 
 img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6oCrLg29uVlKqCoI9ReTwA-p4WC6vEeso3YAbs_HEWgTcvOaqRJPKo6AXB-C_fmpNoszeRuDIKmUSTdCxhg2D0_SwLkVE5BQFoG24yhYTHZFvxaUIn8wkPwk7rLPieNmCOLrJyZF7D0Naa7g74U5wRPwCugN9GlMc-FoeijaEBBxgMdY/s320/spot%20dot%20tv.png",
    link:["https://aman007power.blogspot.com/p/sendbox.html?url=https://www4.sportsnline.click/channels/pt/sporttv5.php", ], 
    categories:["football"], 
    countdown:7 
   },  
   
-  {name:"BeiN SPORTS 2 ⚽", 
+  {name:"BeiN SPORTS 2 ", 
 img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlqIEw824sBdcgq47u-s4i6mOgvNZ_t4IQoMc8FDS729trAveoRXK4AArodw7AZHG_L2VS7vymdc2RpsMz_tTn-BiFAIXzqyvdTBSt0a4riLkNKajZVP2Pi7doW2kf7SpuFIQCNlpB1iHfXmn0-yQb3zAJbSE0ckNLrEdFxb4MdVxliDP-WFMOBnRPrfE/s1600/BEIN%20SP.png",
    link:["https://aman007power.blogspot.com/p/embed-bean-arabic2.html", "https://aaa.yallashoot2026.com/albaplayer/sports-2/?serv=2", "https://frfff.shootwithyalla.com/albaplayer/sports-2/"], 
    categories:["football"], 
    countdown:7 
   }, 
-   {name:"BeiN SPORTS 3 ⚽ ", 
+   {name:"BeiN SPORTS 3  ", 
 img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlqIEw824sBdcgq47u-s4i6mOgvNZ_t4IQoMc8FDS729trAveoRXK4AArodw7AZHG_L2VS7vymdc2RpsMz_tTn-BiFAIXzqyvdTBSt0a4riLkNKajZVP2Pi7doW2kf7SpuFIQCNlpB1iHfXmn0-yQb3zAJbSE0ckNLrEdFxb4MdVxliDP-WFMOBnRPrfE/s1600/BEIN%20SP.png",
    link:[ "https://aman007power.blogspot.com/p/embed-bean-arabic3.html", "https://aaa.yallashoot2026.com/albaplayer/sports-3/?serv=2", "https://frfff.shootwithyalla.com/albaplayer/sports-3/"], 
    categories:["football"], 
    countdown:7 
   }, 
-   {name:"BeiN SPORTS 4 ⚽ ", 
+   {name:"BeiN SPORTS 4  ", 
 img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlqIEw824sBdcgq47u-s4i6mOgvNZ_t4IQoMc8FDS729trAveoRXK4AArodw7AZHG_L2VS7vymdc2RpsMz_tTn-BiFAIXzqyvdTBSt0a4riLkNKajZVP2Pi7doW2kf7SpuFIQCNlpB1iHfXmn0-yQb3zAJbSE0ckNLrEdFxb4MdVxliDP-WFMOBnRPrfE/s1600/BEIN%20SP.png",
    link:[ "https://aman007power.blogspot.com/p/embed-bean-arabic4.html", "https://o2.go-yammmash.online/albaplayer/b4/?serv=2", "https://aaa.yallashoot2026.com/albaplayer/sports-4/?serv=2", "https://frfff.shootwithyalla.com/albaplayer/sports-4/",], 
    categories:["football"], 
@@ -896,7 +910,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEincXuu3TTSiK_s_k
   */
 
   
-   {name:"SPORT.TV 1 ⚽ ", 
+   {name:"SPORT.TV 1  ", 
 img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6oCrLg29uVlKqCoI9ReTwA-p4WC6vEeso3YAbs_HEWgTcvOaqRJPKo6AXB-C_fmpNoszeRuDIKmUSTdCxhg2D0_SwLkVE5BQFoG24yhYTHZFvxaUIn8wkPwk7rLPieNmCOLrJyZF7D0Naa7g74U5wRPwCugN9GlMc-FoeijaEBBxgMdY/s320/spot%20dot%20tv.png",
    link:["https://aman007power.blogspot.com/p/sendbox.html?url=https://www4.sportsnline.click/channels/pt/sporttv1.php", "https://aman007power.blogspot.com/p/embed-spot-dot-tv.html"], 
    categories:["football"], 
@@ -904,7 +918,7 @@ img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6o
   },
 
 
-   {name:"SPORT.TV  2 ⚽ ", 
+   {name:"SPORT.TV  2  ", 
 img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6oCrLg29uVlKqCoI9ReTwA-p4WC6vEeso3YAbs_HEWgTcvOaqRJPKo6AXB-C_fmpNoszeRuDIKmUSTdCxhg2D0_SwLkVE5BQFoG24yhYTHZFvxaUIn8wkPwk7rLPieNmCOLrJyZF7D0Naa7g74U5wRPwCugN9GlMc-FoeijaEBBxgMdY/s320/spot%20dot%20tv.png",
    link:["https://aman007power.blogspot.com/p/sendbox.html?url=https://www4.sportsnline.click/channels/pt/sporttv2.php", "https://aman007power.blogspot.com/p/embed-spot-dot-tv2.html"], 
    categories:["football"], 
@@ -912,7 +926,7 @@ img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6o
   },
 
  
-   {name:"SPORT.TV  3 ⚽ ", 
+   {name:"SPORT.TV  3  ", 
 img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6oCrLg29uVlKqCoI9ReTwA-p4WC6vEeso3YAbs_HEWgTcvOaqRJPKo6AXB-C_fmpNoszeRuDIKmUSTdCxhg2D0_SwLkVE5BQFoG24yhYTHZFvxaUIn8wkPwk7rLPieNmCOLrJyZF7D0Naa7g74U5wRPwCugN9GlMc-FoeijaEBBxgMdY/s320/spot%20dot%20tv.png",
    link:["https://aman007power.blogspot.com/p/sendbox.html?url=https://www4.sportsnline.click/channels/pt/sporttv3.php", "https://aman007power.blogspot.com/p/embed-spot-dot-tv3.html"], 
    categories:["football"], 
@@ -920,7 +934,7 @@ img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6o
   },  
   
 
-   {name:"SPORT.TV 4 ⚽ ", 
+   {name:"SPORT.TV 4  ", 
 img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6oCrLg29uVlKqCoI9ReTwA-p4WC6vEeso3YAbs_HEWgTcvOaqRJPKo6AXB-C_fmpNoszeRuDIKmUSTdCxhg2D0_SwLkVE5BQFoG24yhYTHZFvxaUIn8wkPwk7rLPieNmCOLrJyZF7D0Naa7g74U5wRPwCugN9GlMc-FoeijaEBBxgMdY/s320/spot%20dot%20tv.png",
    link:["https://aman007power.blogspot.com/p/sendbox.html?url=https://www4.sportsnline.click/channels/pt/sporttv4.php", "https://aman007power.blogspot.com/p/embed-spot-dot-tv4.html"], 
    categories:["football"], 
@@ -928,8 +942,8 @@ img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjfyyLGG_Y_j5W6o
   },  
 
 
-  {name:"20 F-boll Channels ⚽ ", 
-img:"https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_emblem.svg/40px-2026_FIFA_World_Cup_emblem.svg.png?_=20230519003440",
+  {name:"20 F-boll Channels  ", 
+img:"https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/2022-04-24_Fu%C3%9Fball%2C_M%C3%A4nner%2C_3._Liga%2C_1._FC_Magdeburg_-_FSV_Zwickau_IMG_4343_by_Stepro.jpg/40px-2022-04-24_Fu%C3%9Fball%2C_M%C3%A4nner%2C_3._Liga%2C_1._FC_Magdeburg_-_FSV_Zwickau_IMG_4343_by_Stepro.jpg",
    link:[ "https://aman007power.blogspot.com/p/20-channel-btn.html" ], 
    categories:["football"], 
    countdown:7 
@@ -1258,7 +1272,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlpXJDcyHlGKjtTd
   },
 
     
-  {name:"A SPORTS ⚽🏏 ", 
+  {name:"A SPORTS 🏏 ", 
    img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6zm-YZtY6VUYvoDkFmYX5HN8GAHE6xmanpSOKKfWq9SV61e-QDZmtVtDJ-KXPprgbwFXz-b7b8FoU1lzdzJPgXpG4LoTmNdFvLrMSaP8KYppGJzk6FLoSWDJK41B4qjtw_CVgq8TlqxfZ7JJuE5E-u5ALAAScO_7lUWqpMyDSjr1jcI6HmO9fv93YDlA/s1600/A%20SPORTS.png",
    link:["https://aman007power.blogspot.com/p/embed-2-asports.html","https://uddinsp.blogspot.com/p/embed-cricket-5_1.html","https://streamcrichd.com/update/asportshd.php"], 
    categories:["cricket"], 
@@ -1266,7 +1280,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlpXJDcyHlGKjtTd
   },
 
   
-  {name:"T SPORTS ⚽🏏 ", 
+  {name:"T SPORTS 🏏 ", 
    img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpN4f_vpvaPp8cTLica_TH_DGS7_T3DuLQ3_MHlvsY5Cu2bzTbKjB7tSrCErvDoRxi0ljaPhBzEmlMFYxRZGI-BTxkU74ycImM1xI5XH-ev-jBXJeEcGKx1M34MLLENdqIV4ndX5ZEmIAhDBHfYp1l0N64RG9vuGMgPGh4a3X0FnaLInr54oJ5BmS8CMY/s320/TSPORTS%20WITH%20AD1.png",
    link:["https://aman007power.blogspot.com/p/embed-tsports-with-ad.html"], 
    categories:["cricket"], 
@@ -1282,7 +1296,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlpXJDcyHlGKjtTd
   },
 
   
-  {name:"PTV SPORTS ⚽🏏  ", 
+  {name:"PTV SPORTS 🏏  ", 
 img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQr4ZCgIcMAiJQ0PH5Toh0aAWz3FcV4YQL8t1pdEVLoN04NxGa-8BrsjDYR4mCgs2eWqwxAEI0oBPz0MbRaqEoGQRfQVSgmx02cfSkeBTSg7IlnEG7L1pqnRyZLDC_6TFDshRxo2a_vqdVWZufwyzDCFZ5CeH0LyfL5TYgFqNJQS5_pYQVpxldVZrdQh0/s1600/PTV%20SPORTS.png",
    link:["https://aman007power.blogspot.com/p/embed-2-ptv.html", "https://uddinsp.blogspot.com/p/embed-cricket-2.html", "https://aman007power.blogspot.com/p/embed-ptv.html", "https://streamcrichd.com/update/ptv.php"], 
    categories:["cricket"], 
@@ -1967,13 +1981,14 @@ UddinSports Disclaimer  </a>  :- Full free watch online sports in UddinSports co
       <br> <br><br>
                   <a href="https://github.com/uddintv/uddinsports/releases/download/v1.0/Uddin.apk" style=" ">
        <button style="text-align: center; background: #04c5d6; border-radius: 25px; border: 0px solid yellow; color: #000; cursor: pointer; font-size: ;  padding: 0px  10px ; ">
-<h3>  <span style="color: #222; "> Install  </span> <u> UddinSports APK </u> </h3>  </button> </a>
+<h2>  <span style="color: #222; "> Install  </span> <u> UddinSports APK </u> </h2>  </button> </a>
 
-      <br> 
+<!--      <br> 
 <h2>  <span style="color: #333; "> or Visit  </h2> 
+      -->
       <br>
-     <a href="https://uddinspo.blogspot.com/" style=" color:yellow ; ">
-     <h3 style=" color: yellow; " ><u> www.uddinspo.blogspot.com </u></h3> 
+     <a href="https://uddinspo.blogspot.com/" style=" color:  ; ">
+     <h3 style=" padding: 5px 10px; text-align:center; align-items:center; justify-content:center; color:#000; background: yellow ; border-radius:0px; " ><u> www.uddinspo.blogspot.com </u></h3> 
      </a>
   </div>
     <br>
