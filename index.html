@@ -257,7 +257,7 @@ video, iframe{
 .video-container::-webkit-scrollbar{
     display:none;           /*..... Chrome scrollbar hide */
 }
-.video-btn{  position: relative; /*   */
+.video-btn{  
     /* min-width:70px;  */
     display:flex; /*   */
     align-items:center;
@@ -281,20 +281,6 @@ video, iframe{
     transform: translateY(-0px);
     background: #012447 ;  /* #000;  */
 }
-  
- /*   */
-.video-btn.active::before{
-    content: "";
-    position: absolute;
-    left: 15px;
-    top: 15px;
-    width: 45px;
-    height: 45px;
-    background: url("https://h5-static.aoneroom.com/spa/videoPlayPage/assets/video-re-play.a2352f21.webp") no-repeat center;
-    background-size: contain;
-    pointer-events: none;
-}
-
   
 .video-btn img{
     width:45px;
@@ -322,6 +308,16 @@ video, iframe{
     color: yellow ;  /*   */
 
 } 
+.video-btn.active span::after{
+    content:"";
+    display:inline-block;
+    width:20px;
+    height:20px;
+    margin-left:8px;
+    vertical-align:middle;
+    background:url("https://h5-static.aoneroom.com/spa/videoPlayPage/assets/video-re-play.a2352f21.webp") no-repeat center;
+    background-size:contain;
+}
 
   
 .video-btn div{
