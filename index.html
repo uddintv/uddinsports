@@ -270,7 +270,7 @@ video, iframe{
     background: #012447; /* #222;  1e1e1e;*/
     text-align:left; /* center  */
   }
-.video-btn:hover {
+.video-btn:not(.active):hover {
    /* transform: translateY(-1px);*/
   background: #061729; /* #1e1e1e; #333;  #012447; */
   border-left: 4px solid yellow ; /* */
@@ -300,12 +300,12 @@ padding: 1px 0px 2px 5px;
     z-index: 3;
 }
 /* hover-এ দ&#2503;খ&#2494;ন&#2507; */
-.video-btn:hover::before {
+.video-btn:not(.active):hover::before {
 opacity: 1;
 }
-.video-btn:active::before {
-opacity: 0;
-}  
+.video-btn.active::before {
+    opacity: 0 !important;
+}
   
   
 .video-btn.active {
@@ -313,6 +313,7 @@ opacity: 0;
    /*  border-bottom: 1px solid lime;  */ 
     transform: translateY(-0px);
     background: #012447 ;  /* #000;  */
+    cursor: default; /* optional */
 }
 
   
@@ -340,12 +341,11 @@ opacity: 0;
     font-weight:bold;
     white-space:nowrap;
 }
-.video-btn:hover span{
+.video-btn:not(.active):hover span {
     color: #999;
 }  
 .video-btn.active span{
     color: yellow ;  /*   */
-
 } 
   /*    */
 .video-btn.active span::after{
@@ -2014,29 +2014,60 @@ document.addEventListener("visibilitychange", () => {
 UddinSports Disclaimer  </a>  :- Full free watch online sports in UddinSports comjust index those links which are already available in internet. All img, link or contents hosted on third party websites. UddinSports does not host any files on it's servers. We does not accept responsibility for contents hosted on third party websites.
       </span>
       
-      <br> <br><br>
+ <div style="margin-top:15px;">
                   <a href="https://github.com/uddintv/uddinsports/releases/download/v1.0/Uddin.apk" style=" ">
        <button style="text-align: center; background: yellow; border-radius: 10px; border: 0px solid yellow; color: #000; cursor: pointer; font-size: ;  padding: 5px  10px ; ">
 <h3>  <span style="color: #222; "> Install  </span> <u> UddinSports APP </u> </h3>  </button> </a>
+    </div>
 
-<br/> <h2>  <span style="color: #333; "> or  </h2>  <br/> 
+    <h2 style="margin:12px 0;">or</h2>
+
+    <div>
                   <a href="https://github.com/uddintv/uddinsports/releases/download/v1.0/Uddin.apk" style=" ">
        <button style="text-align: center; background: #04c5d6; border-radius: 25px; border: 0px solid yellow; color: #000; cursor: pointer; font-size: ;  padding: 0px  10px ; ">
-<h3>  <span style="color: #222; ">  </span> <u> Download APK </u> </h3>  </button> </a>
+<h3>  <span style="color: #222; ">  </span> <u> Download UddinSports APK </u> </h3>  </button> </a>
 
-<br/> 
+    </div>
 
+    <h2 style="margin:12px 0;">or Visit</h2>
       
-      <!--  -->
-      <h2>  <span style="color: #333; "> or Visit  </h2> 
-     
-      <br/>
      <a href="https://uddinspo.blogspot.com/" style=" color: yellow ; ">
      <h3 style=" color:yellow; " ><u> www.uddinspo.blogspot.com </u></h3> 
      </a>
   </div>
     <br>
 
+
+==========
+ <div style="margin-top:15px;">
+        <a href="https://github.com/uddintv/uddinsports/releases/download/v1.0/Uddin.apk">
+            <button style="background:yellow; border:none; border-radius:10px; padding:8px 15px;">
+                <h3 style="margin:0;">Install <u>UddinSports APP</u></h3>
+            </button>
+        </a>
+    </div>
+
+    <h2 style="margin:12px 0;">or</h2>
+
+    <div>
+        <a href="https://github.com/uddintv/uddinsports/releases/download/v1.0/Uddin.apk">
+            <button style="background:#04c5d6; border:none; border-radius:25px; padding:8px 15px;">
+                <h3 style="margin:0;"><u>Download UddinSports APK</u></h3>
+            </button>
+        </a>
+    </div>
+
+    <h2 style="margin:12px 0;">or Visit</h2>
+
+    <a href="https://uddinspo.blogspot.com/" style="color:yellow; text-decoration:none;">
+        <h3 style="margin:0;"><u>www.uddinspo.blogspot.com</u></h3>
+    </a>
+
+</div>
+
+===========
+
+  
   
 <script>
     // ===== কত সেকেন্ড পরে লেখা হাইড হবে =====
