@@ -290,9 +290,9 @@ video, iframe{
     align-items: center;
     justify-content: center;
     font-size: 28px;
-    color: green ;
+    color: #000 ;
 padding: 1px 0px 2px 5px;
-    background: #4444 ;
+    background: #fff ;
     border-radius: 50%;
     opacity: 0;
     transition: opacity .25s;
@@ -303,8 +303,9 @@ padding: 1px 0px 2px 5px;
 .video-btn:hover::before {
 opacity: 1;
 }
-  
-  
+.video-btn:hover::active {
+opacity: 0;
+}  
   
   
 .video-btn.active {
@@ -339,6 +340,9 @@ opacity: 1;
     font-weight:bold;
     white-space:nowrap;
 }
+.video-btn:hover span{
+    color: #999;
+}  
 .video-btn.active span{
     color: yellow ;  /*   */
 
@@ -788,7 +792,7 @@ animation: blink 1s infinite;
   
   <!-- Reload font-size: 30px;height: 24px; width: 24px;-->
     <a href="https://uddintv.github.io/uddinsports" style=" text-decoration: none;">
-  <div style="background: yellow; border-radius: 15px; border: 1px solid #4f5201; color: #000; cursor: pointer; font-size: 18px; font-weight: bold; margin-bottom: 0px; padding: 4px;">
+  <div style="background: rgba(0, 0, 0, 0.8); border-radius: 15px; border: 1px solid yellow ; color: #9aff00; cursor: pointer; font-size: 18px; font-weight: bold; margin-bottom: 0px; padding: 4px;">
       <svg onclick="refreshVideo()" style="cursor: pointer; fill: #000; height: 18px; width: 18px;" viewbox="0 0 24 24">
         <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path>
       </svg>
@@ -843,7 +847,7 @@ img:"https://upload.wikimedia.org/wikipedia/en/thumb/1/17/2026_FIFA_World_Cup_em
 /*   img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhZsErDsWp8KLBemQ2S1MQ-SaVRIiKXMmHaWdLnF3pQJgBI7cKHDTLERVRvHmNMfFRbk9HBU-dIYTZR-3vdslZ9wSABkItc0BZEvp7tMBOaL8hytn1ty-kAQTPouLIp1E0JlBOnNP1COkwT8OvAapvDpQVNXGqq_ccKRkd4EVju81FTfGzTVmA3x8Xp0lk/s320/LIVE%20CRICKET.png",   */
 /* img:"https://upload.wikimedia.org/wikipedia/commons/thumb/b/b0/Cricketball.png/40px-Cricketball.png",  */
 /* img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEisB9xrIaDT59ugkP4Iuz8IGTWVz23Ko-mayGP6cq1z9tmG7VB7I8Jb2MDo_yPYATbGaJQZu6lxwoaZ3IPVbSsjHb7vqDhBrECdneI1zx4VdAj_yBQeruEE-eo-GVqDlBYrQmmFoTKl55ZVltZsbLGgG-5BzGJYLuq6847aOiXEnaLXEXqgFsaWfrMInS8/s1600/CRICKET%20live%202.png",  */
-  {name:" LIVE CRICKET  🏏 ", 
+  {name:" 🏏 LIVE CRICKET ", 
    img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiCOa_G2AE8icWrtXjM8-INztNpTBHZNRWDTpXA83Dt52vQOb1aPWZSfA7gZPBwXqY0ckPaaIIo1_opzNsegEp0wyrt5j-a5q9IQi2frdS-aNW7F8VW1vvFPZam7yYCfKNBo8k8D-py83eTTmpJM6QokvVESLeKXRSqOvkSLl7UcpPHl1RAGVYo4Ah5EYE/s1600/cricket%20boll%20img.png", 
    link:["https://aman007power.blogspot.com/p/embed-all-cricket-tv.html", "https://aman007power.blogspot.com/p/willow-html-body-margin-0-padding-0.html"], 
    categories:["cricket"], 
@@ -1288,7 +1292,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlqIEw824sBdcgq4
       
 /*  */
 
-  {name:"WILLOW CRICKET 🏏 ", 
+  {name:"🏏 WILLOW CRICKET ", 
 img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXUlYW5rv8dPZVfk4ziNhlpcOlhKxWug23qb7YJHTnoUmxAJD3cTCQTR1aO9NvHDjzVQxAVY14iONGDy8WAbUwwJ0DPQ9USjhwRWVRTfvJicbphHM-r0CbGktJjtXvTuvXl9ifXIY8ADyL202O2bxtc8bmBPMQ0OzeXwuvbyWfi2M2qRKiCNl2ExZCvhg/s1600/willow%20cricket.png",
    link:["https://aman007power.blogspot.com/p/embed-2-willow.html","https://uddinsp.blogspot.com/p/embed-cricket-1.html", "https://aman007power.blogspot.com/p/embrd-willow.html", "https://streamcrichd.com/update/willowcricket.php"], 
    categories:["cricket"], 
@@ -1296,7 +1300,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhXUlYW5rv8dPZVfk
   },
   
 
- {name:"SKY CRICKET 🏏 ", 
+ {name:"🏏 SKY CRICKET ", 
 img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlpXJDcyHlGKjtTdrdBcyf4kSn5JdG6-jQ_qRQgDAVwDuG1_lkc9oWby0K5ORbFn3haQXSf8jNVB1vdM2G_HKQfEKprx2q-8Sdr3ywUin6xtMchuMTWLg9S_kVYPZ6ZFdXfxyot3N8IyBT2mXkMmN1L4OCNwynokMC4LVhnXF6QnN4PRl0MQnmSmlyPYI/s1600/sky%20cricket.png",
    link:["https://aman007power.blogspot.com/p/embed-2-skycricket.html","https://uddinsp.blogspot.com/p/embed-cricket-3.html", "https://aman007power.blogspot.com/p/embed-skyc.html", "https://streamcrichd.com/update/skys2.php"], 
    categories:["cricket"], 
@@ -1304,7 +1308,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlpXJDcyHlGKjtTd
   },
 
     
-  {name:"A SPORTS 🏏 ", 
+  {name:"🏏 A SPORTS ", 
    img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg6zm-YZtY6VUYvoDkFmYX5HN8GAHE6xmanpSOKKfWq9SV61e-QDZmtVtDJ-KXPprgbwFXz-b7b8FoU1lzdzJPgXpG4LoTmNdFvLrMSaP8KYppGJzk6FLoSWDJK41B4qjtw_CVgq8TlqxfZ7JJuE5E-u5ALAAScO_7lUWqpMyDSjr1jcI6HmO9fv93YDlA/s1600/A%20SPORTS.png",
    link:["https://aman007power.blogspot.com/p/embed-2-asports.html","https://uddinsp.blogspot.com/p/embed-cricket-5_1.html","https://streamcrichd.com/update/asportshd.php"], 
    categories:["cricket"], 
@@ -1312,7 +1316,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlpXJDcyHlGKjtTd
   },
 
   
-  {name:"T SPORTS 🏏 ", 
+  {name:"🏏 T SPORTS ", 
    img: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgpN4f_vpvaPp8cTLica_TH_DGS7_T3DuLQ3_MHlvsY5Cu2bzTbKjB7tSrCErvDoRxi0ljaPhBzEmlMFYxRZGI-BTxkU74ycImM1xI5XH-ev-jBXJeEcGKx1M34MLLENdqIV4ndX5ZEmIAhDBHfYp1l0N64RG9vuGMgPGh4a3X0FnaLInr54oJ5BmS8CMY/s320/TSPORTS%20WITH%20AD1.png",
    link:["https://aman007power.blogspot.com/p/embed-tsports-with-ad.html"], 
    categories:["cricket"], 
@@ -1320,7 +1324,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlpXJDcyHlGKjtTd
   },
 
   
-  {name:"STAR SPORTS 1 🏏 ", 
+  {name:"🏏 STAR SPORTS 1  ", 
    img:"https://xstreamcp-assets-msp.streamready.in/assets/LIVETV/LIVECHANNEL/LIVETV_LIVETVCHANNEL_STAR_SPORTS_1/images/LOGO_HD/image.png",
    link:["https://aman007power.blogspot.com/p/embed-4-starsports1.html","https://uddinsp.blogspot.com/p/embed-cricket-4.html","https://streamcrichd.com/update/star1hi.php"], 
    categories:["cricket"], 
@@ -1328,7 +1332,7 @@ img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhlpXJDcyHlGKjtTd
   },
 
   
-  {name:"PTV SPORTS 🏏  ", 
+  {name:"🏏 PTV SPORTS   ", 
 img:"https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgQr4ZCgIcMAiJQ0PH5Toh0aAWz3FcV4YQL8t1pdEVLoN04NxGa-8BrsjDYR4mCgs2eWqwxAEI0oBPz0MbRaqEoGQRfQVSgmx02cfSkeBTSg7IlnEG7L1pqnRyZLDC_6TFDshRxo2a_vqdVWZufwyzDCFZ5CeH0LyfL5TYgFqNJQS5_pYQVpxldVZrdQh0/s1600/PTV%20SPORTS.png",
    link:["https://aman007power.blogspot.com/p/embed-2-ptv.html", "https://uddinsp.blogspot.com/p/embed-cricket-2.html", "https://aman007power.blogspot.com/p/embed-ptv.html", "https://streamcrichd.com/update/ptv.php"], 
    categories:["cricket"], 
