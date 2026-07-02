@@ -1,0 +1,340 @@
+<html lang="bn">
+<head>
+<script>
+  
+/* ==== reload page only when open 
+  
+if(!sessionStorage.getItem("pageReloaded")){
+sessionStorage.setItem("pageReloaded","1");
+location.replace(location.href);
+}
+=======*/
+</script>
+  
+
+  
+<meta charset="UTF-8"></meta>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"></meta>
+<title> m3u8 player </title>
+
+<script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+}
+
+#video-wrapper {
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    background: #000;
+}
+
+video {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+  
+  
+/* ভিডিও কন্টেইনারের ব্যাকগ্রাউন্ড সুন্দর রাখা
+.video-container {
+  background: radial-gradient(circle at center, #111 0%, #000 70%) !important;
+} */
+/*  ভিডিওর নিচের সাদা / dummy bar বন্ধ */
+/* buffering / loading spinner এর সময়ও clean থাকবে */
+video::-webkit-media-controls-panel,
+video::-webkit-media-controls {
+  background: transparent !important;
+}
+/*      
+video::-webkit-media-controls-timeline {
+  touch-action: pan-y;
+} */
+/* তিন ডট বা অপশন মেনু লুকানো */
+video::-webkit-media-controls-overflow-button {
+  display: none !important;
+    }
+    
+/* ১. ডিফল্ট ফুলস্ক্রিন বাটন হাইড করা.... ,,,*/
+video::-webkit-media-controls-fullscreen-button {
+    display: none !important;
+}  
+      
+/* ৩. কারেন্ট টাইম এবং বাকি সময়ের ডিসপ্লে হাইড করা */
+video::-webkit-media-controls-current-time-display,
+video::-webkit-media-controls-time-remaining-display {
+    display: none !important;
+}
+/* প্রগ্রেস বা সিক বার লুকানো */
+video::-webkit-media-controls-timeline {
+  display: none !important;
+}
+/* Firefox / অন্যান্য ব্রাউজারের জন্য */
+video {
+  background-color: transparent !important;
+}
+      
+
+      
+#loding {
+    position: absolute;
+    pointer-events: none;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    text-align: center;
+    align-items: center;
+    color: white; 
+    background: rgba(0,0,0,0.0);
+    padding: 0px ;
+    margin: 0px;
+    z-index: 10;
+    font-size: 16px;
+
+    /* blink animation */
+    animation: blink 1s infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+  
+  
+  
+#playBtn {
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 50px;  /* 60px; */
+    color: white;
+    background: rgba(0,0,0,0.2);  /* rgba(0,0,0,0.4); */
+    width: 100%;  /* 90px; */
+    height: 100%;  /* 90px; */
+    border-radius: 0%;  /* 50%;  */
+    display: none; /* flex */
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+}
+
+#playBtn:active {
+   /*  transform: translate(-50%, -50%) scale(0.9); */
+}
+  
+  
+  
+  
+  
+
+        /* --- Unmute Overlay Styles --- */
+        #interaction-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.0);  /*  rgba(0, 0, 0, 0.4);  */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 10;
+            cursor: pointer;
+        }
+        #mute-icon-overlay svg {
+            fill: lime;
+            width: 100px;
+            height: 100px;
+            opacity: 0.8;
+            transition: transform 0.2s;
+        }
+        #interaction-overlay:hover svg {
+            transform: scale(1.1);
+        }
+
+  /* ===== মোবাইল জন্য স্পেশাল ডিজাইন ===== */
+@media (max-width: 500px) {
+        #interaction-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 130%;
+            height: 100%;
+    }
+
+}
+   
+  
+  
+  
+  
+</style>
+</head>
+<body>
+
+<div id="video-wrapper">
+  
+    <div  id="interaction-overlay" onclick="handleInteraction()" ondblclick="toggleFull()">
+                                  <!-- display: flex; -->
+        <div id="mute-icon-overlay" style="display: none; flex-direction: column; align-items: center; justify-content: center;">
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11 5L6 9H2V15H6L11 19V5Z" fill="lime" stroke="white" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M15.5 8.5C16.8333 9.66667 17.5 11.1667 17.5 13C17.5 14.8333 16.8333 16.3333 15.5 17.5" stroke="#666" stroke-width="2" stroke-linecap="round"/>
+               <path d="M4 4L20 20" stroke="red" stroke-width="2" stroke-linecap="round"/>               
+              </svg>
+          
+            <p style="color: #999; font-family: sans-serif; margin-top: 0px; text-align: center; font-weight: bold;"> </p>
+        </div>
+    </div>
+  
+  
+  
+  
+    <div id="loding">Looding..</div>
+  
+  
+    <div id="playBtn"> <span style="color: rgba(0,0,0,0.9); border-radius: 50%; background: white; cursor: pointer; font-size: 50px; padding: 0px 10px 5px 20px;">  ▶ </span>  </div>
+
+  
+    <video  controls="" controlslist="noplaybackrate" id="liveVideo" playsinline=""    preload="metadata" ></video>
+  
+</div>
+
+<script>
+  
+  
+  //player.html?url=https://site.com/video.m3u8  // ADD  IN M3U8 LINK FOR PLAY M3U8 WITH PLAY ICON
+  
+  //player.html?url=https://video.m3u8&sec=3  // ADD &sec=3  IN M3U8 LINK FOR 3 SEC AFTER HIDE LODING TEXT
+  
+  //player.html?url=https://video.m3u8&play=3  // ADD &play=3 IN M3U8 LINK FOR  SHOW PLAY ICON AFTER 3 SEC OR DELAY 3 SEC
+
+  
+  
+  const video = document.getElementById("liveVideo");
+  
+const params = new URLSearchParams(window.location.search);
+
+const streamUrl = params.get("url");
+  
+  
+  
+
+
+
+  
+  if (Hls.isSupported()) {
+    const hls = new Hls();
+    hls.loadSource(streamUrl);
+    hls.attachMedia(video);
+   
+    
+hls.on(Hls.Events.MANIFEST_PARSED, () => {
+    // কিছুই করবে না
+});
+
+video.addEventListener("loadedmetadata", () => {
+    // কিছুই করবে না
+});
+    
+        
+ }
+  
+  
+</script>
+  
+  
+<script>
+      //&sec=3
+    //player.html?url=https://site.com/video.m3u8&sec=3
+    // ===== কত সেকেন্ড পরে loding লেখা হাইড হবে =====
+
+const hideSec = parseInt(params.get("sec")) || 0;
+
+setTimeout(() => {
+    document.getElementById("loding").style.display = "none";
+}, hideSec * 1000);
+
+</script>
+  
+<script>
+const playBtn = document.getElementById("playBtn");
+
+// শুরুতে hide
+//playBtn.style.display = "none";
+playBtn.style.display = "flex";
+
+
+  /*
+// ৩ সেকেন্ড পরে show (কিন্তু condition সহ)
+setTimeout(() => {
+    // যদি ভিডিও pause থাকে → show
+    if (video.paused) {
+        playBtn.style.display = "flex";
+    }
+}, 3000);
+*/
+  
+playBtn.addEventListener("click", () => {
+    video.play();
+    playBtn.style.display = "none";
+});
+
+// ভিডিও pause হলে আবার button দেখাবে
+video.addEventListener("pause", () => {
+    playBtn.style.display = "flex";
+});
+
+// ভিডিও play হলে button লুকাবে
+video.addEventListener("play", () => {
+    playBtn.style.display = "none";
+});
+</script>
+  
+<script>
+  //চাইলে play button- delay দিতে পারবেন
+  // 2 sec delay show  play button
+  //&play=2
+  //player.html?url=...m3u8&sec=5&play=2 
+  
+  /*
+  const playDelay = parseInt(params.get("play")) || 0;
+
+setTimeout(() => {
+    playBtn.style.display = "flex";
+}, playDelay * 1000);
+
+  */
+  
+</script>
+  
+<script>
+
+  
+  
+    // আনমিউট করার ফাংশন
+    function handleInteraction() {
+        const video = document.getElementById('liveVideo');
+        video.muted = false;
+        video.volume = 1.0;
+          // আবার play করাবে
+      //video.play();
+
+            // overlay hide
+        document.getElementById('interaction-overlay').style.display = 'none';
+    }
+
+</script>
+
+</body>
+</html>
