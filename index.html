@@ -589,7 +589,7 @@ animation: blink 1s infinite;
   
   
 #delayed-ad {
-    display: none;
+    display:none !important;
     position: absolute;/* fixed */
     top: 5px; /* সামান্য উপর থেকে নিচে */
     left: 50%;
@@ -605,7 +605,7 @@ animation: blink 1s infinite;
 }
 
 /* অ্যাড কন্টেইনার যা সব সাইজ অ্যাডকে ফিট করবে */
-.ad-wrapper {
+.ad-wrapper {display:none !important;
     width: 100%;
     overflow: hidden;
     display: flex;
@@ -614,14 +614,14 @@ animation: blink 1s infinite;
 }
 
 /* যদি অ্যাডটি কন্টেইনারের চেয়ে বড় হয় তবে সেটি অটো ছোট হয়ে যাবে */
-.ad-wrapper iframe {
+.ad-wrapper iframe {display:none !important;
     max-width: 100% !important;
     height: auto !important;
 }
 
 
 /*  */
-#taxt-ad {
+#taxt-ad {display:none !important;
     position: absolute;
     top: 0px;
     left : 2px;
@@ -633,7 +633,7 @@ animation: blink 1s infinite;
   
 
 /* বন্ধ করার (X) বাটন */
-#close-ad {
+#close-ad {display:none !important;
     position: absolute;
     /* top: 52px; */
     bottom: 0px;/*-10px;*/
@@ -688,7 +688,6 @@ animation: blink 1s infinite;
 </head>
 <body>
   
-<!-- অ্যাড কন্টেইনার -->
 
   
 <div class="main-wrapper">
@@ -705,12 +704,12 @@ animation: blink 1s infinite;
 <div class="player-wrapper" id="videoBox" style="background: #000;">
   
   
-<div id="delayed-ad">
-  <span style="color: ; " id="taxt-ad"> Ad </span>
+<div id="delayed-ad"  style="display:none;  >
+  <span  style="display:none; id="taxt-ad"> Ad </span>
 
-  <button id="close-ad" onclick="hideAd()">X</button>
-    <div class="ad-container" style="height: 50px;">
-        <script type="text/javascript">
+  <button  style="display:none; id="close-ad" onclick="hideAd()">X</button>
+    <div  style="display:none; class="ad-container" style="height: 50px;">
+     <!--    <script type="text/javascript">
             atOptions = {
                 'key' : '08ac4af8ab2ee30ce078eabb3e29641b',
                 'format' : 'iframe',
@@ -720,6 +719,7 @@ animation: blink 1s infinite;
             };
         </script>
         <script type="text/javascript" src="https://www.highperformanceformat.com/08ac4af8ab2ee30ce078eabb3e29641b/invoke.js"></script>
+    -->
     </div>
 </div>  
 
@@ -1799,31 +1799,31 @@ playerBox.addEventListener("mouseleave", () => {
    👉 অ্যাড TIME সাইকেল 
 ============================ */
   
-  var adTimer;
+//  var adTimer;
 
 // ১. অ্যাড সাইকেল শুরু করার ফাংশন
 function startAdCycle() {
     // আগে যদি কোনো অ্যাড টাইমার থাকে তা বন্ধ করা
-    clearTimeout(adTimer);
-    document.getElementById('delayed-ad').style.display = 'none';
+  //  clearTimeout(adTimer);
+  //  document.getElementById('delayed-ad').style.display = 'none';
 
     // ১ মিনিট (৬০,০০০ মিলি-সেকেন্ড) পর অ্যাড দেখাবে
     // আপনি চাইলে সময় কমাতে বা বাড়াতে পারেন (যেমন: ১০ সেকেন্ড হলে ১০০০০)
-    adTimer = setTimeout(showAd, 1 * 60 * 1000);  // 2 * 60 * 1000 এর জায়গায় 5000 (৫ সেকেন্ড) দিয়ে পারেন 
+   // adTimer = setTimeout(showAd, 1 * 60 * 1000);  // 2 * 60 * 1000 এর জায়গায় 5000 (৫ সেকেন্ড) দিয়ে পারেন 
 }
 
 // ২. অ্যাড দেখানোর ফাংশন
 function showAd() {
-    document.getElementById('delayed-ad').style.display = 'block';
+  //  document.getElementById('delayed-ad').style.display = 'block';
 }
 
 // ৩. অ্যাড লুকানোর ফাংশন
 function hideAd() {
-    document.getElementById('delayed-ad').style.display = 'none';
+   // document.getElementById('delayed-ad').style.display = 'none';
     
     // অ্যাড বন্ধ করার ১০ মিনিট পর আবার দেখানোর জন্য টাইমার সেট করা
     clearTimeout(adTimer);
-    adTimer = setTimeout(showAd, 10 * 60 * 1000); 
+   // adTimer = setTimeout(showAd, 10 * 60 * 1000); 
 }
 
   
@@ -1979,7 +1979,7 @@ document.addEventListener("visibilitychange", () => {
   
   <br>
 
-<!-- অ্যাড কন্টেইনার   -->
+<!-- অ্যাড কন্টেইনার  
 <div class="ad-container" style="height: 50px;">
 <script>
   atOptions = {
@@ -1991,8 +1991,8 @@ document.addEventListener("visibilitychange", () => {
   };
 </script>
 <script src="https://www.highperformanceformat.com/08ac4af8ab2ee30ce078eabb3e29641b/invoke.js"></script></div>
-  <br />
-<!-- অ্যাড কন্টেইনার   -->
+  <br /> -->
+<!-- অ্যাড কন্টেইনার  
 <div class="ad-container" style="height: 50px;">
 <script>
   atOptions = {
@@ -2004,8 +2004,8 @@ document.addEventListener("visibilitychange", () => {
   };
 </script>
 <script src="https://www.highperformanceformat.com/08ac4af8ab2ee30ce078eabb3e29641b/invoke.js"></script></div>
-  <br />
-<!-- অ্যাড কন্টেইনার   -->
+  <br />  -->
+<!-- অ্যাড কন্টেইনার 
 <div class="ad-container" style="height: 50px;">
 <script>
   atOptions = {
@@ -2017,7 +2017,7 @@ document.addEventListener("visibilitychange", () => {
   };
 </script>
 <script src="https://www.highperformanceformat.com/08ac4af8ab2ee30ce078eabb3e29641b/invoke.js"></script></div>
-
+  -->
   
     <div style=" text-align: center; margin: 20px;">
       <span style="color: #888 ;  font-size: 12px; ">
