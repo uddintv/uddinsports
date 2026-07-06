@@ -11,7 +11,7 @@ CHARSET + MOBILE VIEW
 <!-- =================================
 PAGE TITLE
 ================================= -->
-<title>ADD URL FOR AD FREE</title>
+<title>SENDBOX PLAYER</title>
 
 <style>
 
@@ -52,6 +52,24 @@ border:none;
 }
 
 
+      
+#countdown{
+    position:absolute;
+    top:50%;
+    left:50%;
+    transform:translate(-50%,-50%);
+    color:#666;
+    font-size:80px;
+    font-weight:bold;
+    font-family:Arial,sans-serif;
+    z-index:9999;
+
+    pointer-events:none; /* কোনো ক্লিক ধরবে না */
+    user-select:none;
+}
+  
+  
+  
 </style>
 
 </head>
@@ -71,10 +89,16 @@ sandbox="allow-scripts allow-same-origin allow-forms allow-presentation"
 <iframe
 id="phpFrame"
 sandbox="allow-scripts allow-same-origin"
-allow="autoplay; fullscreen"
+allow="autoplay; fullscreen; encrypted-media" 
+allowfullscreen=""  
+playsinline="" 
+referrerpolicy="no-referrer" 
+scrolling="no"
 allowfullscreen
+autoplay
 ></iframe>
 
+<div id="countdown"></div>
 
 
 </div>
@@ -133,10 +157,46 @@ document.getElementById("centerText").innerHTML="NO STREAM LINK FOUND";
 
 }
 
-
-
-
 </script>
 
+  
+<script>
+const countdown = document.getElementById("countdown");
+
+// URL থেকে sec parameter পড়া
+let count = parseInt(params.get("sec")) || 0;
+
+if (count > 0) {
+
+    countdown.style.display = "block";
+    countdown.textContent = count;
+
+    const timer = setInterval(() => {
+
+        count--;
+
+        if (count > 0) {
+
+            countdown.textContent = count;
+
+        } else {
+
+            clearInterval(timer);
+            countdown.style.display = "none";
+
+        }
+
+    }, 1000);
+
+} else {
+
+    // sec না থাকলে countdown দেখাবে না
+    countdown.style.display = "none";
+
+}
+</script>
+  
+  
+  
 </body>
 </html>
