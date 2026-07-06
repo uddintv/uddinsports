@@ -1,0 +1,498 @@
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta content="width=device-width, initial-scale=1.0" name="viewport">
+<title>willow</title>
+
+<style>
+/* Button Area Container */
+.channel-menu {
+    display: flex;
+    align-items: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: nowrap;
+    gap: 4px;
+    flex: 1;
+    padding: 2px;
+    scrollbar-height: thin;
+    /* বাম থেকে ডানে দেখানোর জন্য */
+    direction: ltr; 
+    /* position: relative; */
+  
+    background: #222; /* #222; */
+   height: 40px;
+  
+  }
+  
+.channel-menu::-webkit-scrollbar {
+    height: 6px;
+}
+
+.channel-menu::-webkit-scrollbar-thumb {
+    background: #552a86;
+    border-radius: 20px;
+}
+
+/* Server Buttons Container */
+#serverButtons {
+    display: grid;
+    /* ৪টি কলাম তৈরি করবে এবং ৪টির কম থাকলেও সমানভাবে জায়গা ভাগ করে নিবে */
+    grid-template-columns: repeat(5, minmax(0, 1fr)); 
+    gap: 4px;
+    width: 100%;
+    flex-shrink: 0; 
+}
+
+/* বাটন ৪টির বেশি হলে গ্রিডকে অটো কলামে কনভার্ট করবে যাতে স্ক্রলবার আসে */
+#serverButtons:has(.server-btn:nth-child(5)) {
+    display: flex;
+    flex-wrap: nowrap;
+}
+
+/* Buttons */
+.server-btn {
+    flex-shrink: 0;
+    flex-grow: 1;
+    /* ৪টির বেশি বাটনের ক্ষেত্রে প্রতিটা ২৫% জায়গা নিবে */
+    min-width: calc(20% - 4px); /* calc(25% - 4px); */
+    padding: 6px 4px;
+    border: none;
+    border-radius: 12px; /*  0px;   */
+    background: #552a86; /* #552a86; #d1020288; */
+    color: #fff;
+    white-space: nowrap;   /* 🔥 এইটা যোগ করো */
+    border: 1px solid #777 ;  /*  */
+    cursor: pointer;
+    font-size: 14px;
+    transition: .3s;
+    text-align: center;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.server-btn:hover {
+    background: #3d0380;
+    transform: translateY(-1px);
+}
+
+.server-btn.active {
+    background: rgb(0, 128, 0, 0.8);    /* rgb(0, 128, 0, 0.8);  #ff0000; */
+    color: yellow;   /*  */
+    font-weight: bold;   /*  */
+    border: 1px solid yellow;     /*  */
+  
+}
+
+/* Refresh Button Sticky on Right */
+.refresh-btn {
+    position: absolute;
+    /* বাম থেকে ডানে আসার পর ডানপাশে স্টিকি রাখার জন্য */
+    right: 0; 
+    z-index: 10;
+    flex-shrink: 0;
+    width: 32px ;  /*  */
+    height: 32px;  /*  */
+    border: none;
+    border-radius: 0;
+    background: #333; /* #333; */
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    padding: 0px; /* 2px;  */
+    margin-left: auto; /* রিফ্রেশ বাটনকে ডানে পুশ করার জন্য */
+}
+
+.refresh-btn:hover {
+    background: green;
+}
+
+.refresh-icon {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+}
+  
+.refresh-btn.spin .refresh-icon {
+    animation: spin .3s linear;
+}
+
+@keyframes spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(100deg); }
+}
+
+/* Player Box - ভিডিও ফুল দেখানোর জন্য ফিক্সড */
+.player-box {
+  position:absolute;
+  top:45px;  /* <-- control box top + control box height অনুযায়ী adjust */
+  left:0;
+  width:100%;
+  height:calc(100% - 45px); /* পুরো page থেকে control box area বাদ দিলাম */
+  border:none;
+}
+
+.player-box iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
+
+/* unmute message */
+#unmuteMsg {
+    display: none;
+    position: absolute;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0,0,0,0.6);
+    color: #fff;
+    border: 2px solid #fff;
+    padding: 10px 15px;
+    border-radius: 8px;
+    text-align: center;
+    z-index: 99999;
+    opacity: 0;
+    transition: all 0.2s ease;
+}
+
+#unmuteMsg.show {
+    bottom: 10px;
+    opacity: 1;
+}
+
+#unmuteMsg.hide {
+    bottom: -60px;
+    opacity: 0;
+}
+      
+#loding {
+    position: absolute;
+    pointer-events: none;
+    top: 60%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+    text-align: center;
+    align-items: center;
+    color: white; 
+    background: rgba(0,0,0,0.0);
+    padding: 0px ;
+    margin: 0px;
+    z-index: 10;
+    display: none;
+    animation: blink 1s infinite;
+  
+    font-size: 20px;  /* */
+    font-weight: bold; /*  */
+}
+  
+
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0.3; }
+    100% { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<div class="channel-menu">
+    <!-- সার্ভার বাটনগুলো আগে থাকবে যাতে বাম থেকে শুরু হয় -->
+    <div id="serverButtons"></div>
+
+    <!-- রিফ্রেশ বাটন পরে থাকবে যাতে এটি ডানপাশে স্টিকি থাকে -->
+    <button class="refresh-btn" onclick="refreshVideo()" aria-label="Refresh">
+        <svg class="refresh-icon" style="cursor: pointer; fill: yellow; font-weight: bold; height: 24px; width: 24px;" viewbox="0 0 24 24">
+            <path d="M17.65 6.35C16.2 4.9 14.21 4 12 4c-4.42 0-7.99 3.58-7.99 8s3.57 8 7.99 8c3.73 0 6.84-2.55 7.73-6h-2.08c-.82 2.33-3.04 4-5.65 4-3.31 0-6-2.69-6-6s2.69-6 6-6c1.66 0 3.14.69 4.22 1.78L13 11h7V4l-2.35 2.35z"></path>
+        </svg> 
+    </button>
+</div>
+
+<div class="player-box">
+    <div id="loding">Looding..</div>
+    <div id="unmuteMsg"></div>
+    <iframe sandbox="allow-same-origin allow-scripts allow-forms" id="player" allow="autoplay; fullscreen; encrypted-media" referrerpolicy="no-referrer" scrolling="no" src="" autoplay></iframe>
+</div>
+
+<script>
+// ডাটা কম-বেশি করে বাটন চেক করতে পারেন
+const serverData = [
+      
+ 
+   // 
+    //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv1', url: "https://aman007power.blogspot.com/p/somoy-m3u8.html",  countdown: 3 },
+
+  
+  
+
+   // { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv2', url: "https://aman007power.blogspot.com/p/dynamic-m3u8-player.html?url=https://live.inplyr.com/room/168740.m3u8&sec=3",  countdown: 3 },
+ // 
+  
+  
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv1', url: "https://aman007power.blogspot.com/p/embed-bein-2-m3u8-with-play-btn.html",  countdown: 3 },
+
+   //DAZN - 2 CLICK
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv1', url: "https://uddintv.github.io/uddinsports/adFreeUrl2.html?url=https://intac.live/live/dazn1_spain.php",  countdown: 7 },
+  { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv1', url: "https://aman007power.blogspot.com/p/embed-dazn-2click.html",  countdown: 7 },
+  
+  
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv2', url: "https://aman007power.blogspot.com/p/embed-iframe-2.html",  countdown: 3 },
+  
+  // TURKI - TRT 1 
+  { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv2', url: "https://aman007power.blogspot.com/p/dynamic-m3u8-player.html?url=https://andro.226503.xyz/checklist/androstreamlivebs1.m3u8",  countdown: 1 },
+  
+ 
+   // CHINA
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://aman007power.blogspot.com/p/cina-m3u8.html",  countdown: 3 },
+ { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://aman007power.blogspot.com/p/dynamic-m3u8-player.html?url=https://live.inplyr.com/room/168740.m3u8",  countdown: 1 },  
+
+  
+  //tsn 1 - 2 click
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://uddintv.github.io/uddinsports/adFreeUrl2.html?url=https://intac.live/live/tsn1_english.php",  countdown: 7 },  
+  
+    // somoy tv
+    { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://aman007power.blogspot.com/p/dynamic-m3u8-player.html?url=https://live.thebosstv.com:30443/dwlive/Somoy-TV/playlist.m3u8",  countdown: 1 },  
+
+  
+   // { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv13', url: "https://aman007power.blogspot.com/p/embed-iframe-1.html",  countdown: 3 },
+
+  
+ { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv5', url: "https://uddintv.github.io/uddinsports/adFreeUrl.html?url=https://lovetier.bz/player/SPT5",  countdown: 6 },
+  
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv6', url: "https://aman007power.blogspot.com/p/embed-tsn-2click.html",  countdown: 7 },
+  { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv6', url: "https://aman007power.blogspot.com/p/sendbox.html?sec=6&url=https://247sports.pro/live/tsn1_english.php",  countdown: 7 },
+
+  
+//{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right: 3px;">▶ </span>  Server7', url: "https://uddintv.github.io/uddinsports/adFreeUrl2.html?url=https://intac.live/live/npo1_dutch.php",  countdown: 8 },  
+
+  
+  
+  
+  //
+ // { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv2', url: "https://aman007power.blogspot.com/p/embed-iframe-2.html",  countdown: 3 },
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv2', url: "https://uddintv.github.io/uddinsports/m3u8_player_with_btn.html?url=https://1.simoplay.com/my-hls/b7xk35l5sku.m3u8&sec=4",  countdown: 3 },
+
+
+  
+//{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv1', url: "https://aman007power.blogspot.com/p/embed-iframe-3_01354700001.html",  countdown: 3 },
+  
+  ///
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://uddintv.github.io/uddinsports/adFreeUrl.html?url=https://lovetier.bz/player/M6FR",  countdown: 6 },  
+  
+  /// with ad bein 1
+ // { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://aman007power.blogspot.com/p/embed-bein-1-php.html",  countdown: 6 },  
+
+  
+  ///
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://aman007power.blogspot.com/p/embed-bein-2-m3u8-with-play-btn.html",  countdown: 3 },  
+
+    
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://aman007power.blogspot.com/p/sendbox.html?url=https://247sports.pro/live/tsn1_english.php",  countdown: 6 },
+
+  
+//{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', ur3: "https://uddintv.github.io/uddinsports/adFreeUrl.html?url=https://tarajinw.blogspot.com/p/blog-page_24.html?m=1",  countdown: 3 },
+  
+
+//{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv2', url: "https://aman007power.blogspot.com/p/embed-iframe-4.html",  countdown: 3 },
+  
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://uddintv.github.io/uddinsports/m3u8_player_with_btn.html?url=https://live.thebosstv.com:30443/dwlive/Somoy-TV/playlist.m3u8&sec=3",  countdown: 3 },
+  
+   //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://uddintv.github.io/uddinsports/adFreeUrl.html?url=https://aliez.tv/player/live.php?id=261716",  countdown: 6 },
+
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://aman007power.blogspot.com/p/sendbox.html?url=https://247sports.pro/live/tsn2_english.php",  countdown: 6 },
+  
+  
+//{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://uddintv.github.io/uddinsports/adFreeUrl2.html?url=https://intac.live/live/tsn1_english.php",  countdown: 6 },  
+  
+
+
+// BEIN  1 AROBI
+//{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://uddintv.github.io/uddinsports/adFreeUrl2.html?url=https://w4.sportsonlline.click/channels/hd/hd11.php",  countdown: 8 },  
+
+  
+  
+  
+  
+  
+  ///
+ //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://aman007power.blogspot.com/p/sendbox.html?url=https://ww2.sporttsonline.click/channels/hd/hd6.php",  countdown: 6 },
+
+
+// { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://aman007power.blogspot.com/p/sendbox.html?url=https://ww2.sporttsonline.click/channels/hd/hd4.php",  countdown: 6 },
+
+  
+  
+  ////
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://uddintv.github.io/uddinsports/adFreeUrl.html?url=https://lovetier.bz/player/ViaplayLaLigaUK",  countdown: 6 },
+
+  ////
+   // { name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://uddintv.github.io/uddinsports/adFreeUrl.html?url=https://lovetier.bz/player/SPT5",  countdown: 6 },
+
+
+
+    ////
+//{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://uddintv.github.io/uddinsports/adFreeUrl.html?url=https://lovetier.bz/player/TSN4",  countdown: 6 },
+
+
+  
+  
+  // TSN 1
+//{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://uddintv.github.io/uddinsports/adFreeUrl2.html?url=https://capoplay.icu/embed/canal33.php",  countdown: 6 },
+
+  
+  
+  
+     //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://uddintv.github.io/uddinsports/adFreeUrl.html?url=https://lovetier.bz/player/TSN2",  countdown: 6 },
+
+  
+ //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Server2', url: "https://sudamericaplay2.com/canal_8112/cza_dsports.html", countdown:3 },
+  
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Server2', url: "https://aman007power.blogspot.com/p/embed-mpd-1.html", countdown:5 },
+  
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Server2', url: "https://sportlink18.pages.dev/Channel/PL2", countdown: 4 },
+
+  
+  
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Server2', url: "https://aman007power.blogspot.com/p/tsports-m3u8.html",  countdown:7 },
+
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv3', url: "https://aman007power.blogspot.com/p/embed-f-boll-somoy-tv.html",  countdown:7 },
+
+
+ //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Tv4', url: "https://aman007power.blogspot.com/p/embed-spot-dot-tv5.html",  countdown: 11 },
+  
+  
+  //{ name: '<span style="font-size:9px;color:#000; background:#fff; padding:2px 0px 2px 4px; border-radius:25px; margin-right:-3px;">▶ </span> &nbsp; Player2', url: "https://aman007power.blogspot.com/p/embed-mpd-1.html", countdown: 5 },
+  
+];
+let currentServerIndex = 0;
+
+const iframe = document.getElementById("player");
+const serverContainer = document.getElementById("serverButtons");
+const loader = document.getElementById("loding");
+const msg = document.getElementById("unmuteMsg");
+
+function renderServerButtons(){
+    serverContainer.innerHTML = "";
+
+    serverData.forEach((server, index)=>{
+        let btn = document.createElement("div");
+        btn.className = "server-btn";
+        btn.innerHTML = server.name;
+        btn.onclick = () => switchServer(index);
+        serverContainer.appendChild(btn);
+    });
+
+    updateUI();
+}
+
+function switchServer(index){
+    currentServerIndex = index;
+    iframe.src = "about:blank";
+    updateUI();
+    const server = serverData[index];
+
+    setTimeout(()=>{
+        iframe.src = server.url + "?t=" + Date.now();
+        showUnmuteMessage();
+        if(server.countdown > 0){
+            showLoading(server.countdown);
+        } else {
+            hideLoading();
+        }
+    }, 50);
+}
+
+function updateUI(){
+    document.querySelectorAll(".server-btn").forEach((btn,i)=>{
+        btn.classList.toggle("active", i === currentServerIndex);
+    });
+}
+
+let loadTimer = null;
+
+function showLoading(time){
+    loader.style.display = "block";
+    clearTimeout(loadTimer);
+    loadTimer = setTimeout(()=>{
+        loader.style.display = "none";
+    }, time * 1000);
+}
+
+function hideLoading(){
+    loader.style.display = "none";
+}
+
+function showUnmuteMessage(){
+    msg.classList.add("show");
+    setTimeout(()=>{
+        msg.classList.remove("show");
+    }, 3000);
+}
+
+  
+  
+  
+function refreshVideo() {
+    const btn = document.querySelector('.refresh-btn');
+    const player = document.getElementById('player');
+
+    // Spin animation শুরু
+    btn.classList.add('spin');
+
+    // Animation শেষ হলে ক্লাস সরিয়ে দিন
+    setTimeout(() => {
+        btn.classList.remove('spin');
+    }, 300);
+
+    // Video Refresh
+    const currentSrc = player.src;
+    player.src = "about:blank";
+
+    setTimeout(() => {
+        player.src = currentSrc + (currentSrc.includes("?") ? "&" : "?") + "t=" + Date.now();
+    }, 50);
+}
+  
+  
+  
+  
+     // for normal server 1 play when load..
+    //EXAMPOL... https://aman007power.blogspot.com/p/embed-world-cup-football.html
+// window.onload = function(){ renderServerButtons(); switchServer(currentServerIndex);};
+  
+    //এটার পরিবর্তে এটি for add ?server=3 this in link for play server 3 when load...
+   //EXAMPOL... https://aman007power.blogspot.com/p/embed-world-cup-football.html?server=3
+window.onload = function () {
+    renderServerButtons();
+
+    // URL থেকে server parameter পড়া
+    const params = new URLSearchParams(window.location.search);
+    let server = parseInt(params.get("server"));
+
+    // যদি valid server হয়
+    if (!isNaN(server) && server >= 1 && server <= serverData.length) {
+        currentServerIndex = server - 1;
+    } else {
+        currentServerIndex = 0; // Default Server 1
+    }
+
+    switchServer(currentServerIndex);
+};
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+</script>
+</body>
+</html>
