@@ -1,0 +1,102 @@
+<html lang="bn">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clappr Player</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    overflow: hidden;
+}
+
+#player {
+    width: 100vw;
+    height: 100vh;
+}
+
+  
+#player,
+.clappr-player,
+.player-container,
+.player-poster,
+.player-poster,
+.player-poster[data-poster],
+.player-poster .play-wrapper,
+.media-control,
+.container,
+video {
+    background: transparent !important;
+}
+  
+.clappr-player *,
+.player-container *,
+.player-poster * {
+    background-color: transparent !important;
+}
+ 
+  
+  
+</style>
+
+<script src="https://cdn.jsdelivr.net/npm/clappr@latest/dist/clappr.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@clappr/hlsjs-playback@latest/dist/hlsjs-playback.min.js"></script>
+</head>
+
+<body>
+
+<div id="player"></div>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const streamUrl = params.get("url");
+
+if (streamUrl) {
+    const player = new Clappr.Player({
+        source: streamUrl,
+        parentId: "#player",
+        plugins: [HlsjsPlayback],
+
+        autoPlay: true,     // ❌ autoplay বন্ধ  false,
+        mute: false,
+
+        width: "100%",
+        height: "100%",
+    });
+}
+  
+  
+  
+  
+  /*
+  // use postter
+const player = new Clappr.Player({
+    source: streamUrl,
+    poster: "poster.jpg",
+    parentId: "#player",
+    plugins: [HlsjsPlayback],
+    autoPlay: true,
+    mute: true
+});
+  */
+  
+  
+player.on(Clappr.Events.PLAYER_READY, function () {
+    player.el.addEventListener("click", function () {
+        if (player.isPlaying()) {
+            player.pause();
+        } else {
+            player.play();
+        }
+    });
+});
+  
+  
+</script>
+
+</body>
+</html>
