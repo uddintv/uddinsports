@@ -1838,113 +1838,11 @@ if ("mediaSession" in navigator) {
   
 
   </script>
-<script>
-  /* ============================
-   👉 killEverything
-==================
-  
-function killEverything(){
 
- const iframe=document.getElementById("player");  
-  const video=document.getElementById("videoPlayer");
-  
-  // stop iframe
- if(iframe){iframe.src="about:blank";}  
-    
-  
-  // stop video
-if(video){
-video.pause();
-video.removeAttribute("src");
-}
-  // destroy HLS
-if(window.hls){
-window.hls.destroy();
-window.hls = null;
-}
-
-}
-========== */
-
-  
-/* ============================
-   👉 Page leave detect
-==================
-
-window.addEventListener("pagehide", killEverything);
-window.addEventListener("beforeunload", killEverything);
-
-========== */
-  
-  
-/* ============================
-   👉 Mobile back / minimize detect
-==================
-document.addEventListener("visibilitychange", function () {
-    if (document.hidden) {
-        killEverything();
-        sessionStorage.setItem("needReload", "yes");  // mark for reload
-    } else {
-        if (sessionStorage.getItem("needReload") === "yes") {
-            sessionStorage.removeItem("needReload");
-           //  location.reload();   //reload বন্ধ NOW IF UNCOMENT ... 🔥 one time fresh reload
-        }
-    }
-});  ========== */
-
-
-/* ============================
-   👉 Page hide হলে player stop 
-   👉 come back in page this video reload
-============================ 
-
-document.addEventListener("visibilitychange", function() {
-    if (document.hidden) {
-        videoPlayer.pause();
-    } else {
-        if (!document.hidden) {
-    // loadVideo(currentIndex);
-          location.reload();
-          
-        }
-    }
-});
-   */
-  
-  
-/* ===== AUTO REFRESH AFTER 60 SECONDS
-let leaveTime = 0;
-
-document.addEventListener("visibilitychange", function() {
-    if (document.hidden) {
-        // ইউজার যখন অন্য ট্যাবে যাবে, সময় ধরে রাখবে
-        leaveTime = Date.now();
-    } else {
-        // ইউজার যখন ফিরে আসবে
-        if (leaveTime > 0) {
-            let duration = (Date.now() - leaveTime) / 1000; // কত সেকেন্ড বাইরে ছিল
-
-            if (duration >= 60) {
-                // যদি ৬০ সেকেন্ডের বেশি হয়, তবেই পুরো পেজ রিফ্রেশ হবে
-                location.reload();
-            } else {
-                // ৬০ সেকেন্ডের কম হলে রিলোড হবে না, কিছুই করার দরকার নেই
-                leaveTime = 0; 
-                console.log("Returned fast, no reload.");
-            }
-        }
-    }
-});  
-   ===== */
-
-
-</script>
-
-  
   
 <!-- ============================
    👉 60 SEC WAIT RELOD FOR COME BACK
-============================ -->
+==================
   
 <script>
 let leaveTime = null;
@@ -1974,7 +1872,7 @@ document.addEventListener("visibilitychange", () => {
     }
 });
 </script> 
-  
+  ========== -->
   
   
   <br>
